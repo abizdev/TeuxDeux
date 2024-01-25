@@ -29,12 +29,15 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const { editTodo, delTodo } = useTodosStore()
+const { editTodo, delTodo, setLocalStorate } = useTodosStore()
 
 const inputValue = ref<string>(props.todoValue);
 const checkboxValue = ref<boolean>(false)
 
-const delItem = (todoId: string) => delTodo(todoId);
+const delItem = (todoId: string) => {
+  delTodo(todoId)
+  setLocalStorate()
+};
 
 const updatedVals = (isChecked?: boolean) => {
 
@@ -44,6 +47,7 @@ const updatedVals = (isChecked?: boolean) => {
     checked: isChecked
   }
   editTodo(updatedTodo)
+  setLocalStorate()
 }
 
 watch(checkboxValue, (newVal) => {

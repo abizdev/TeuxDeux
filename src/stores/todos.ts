@@ -22,6 +22,9 @@ export const useTodosStore = defineStore('todos', {
 
       // delete item
       this.todosList.splice(existingItem, 1)
+    },
+    setLocalStorate(payload?: any) {
+      localStorage.todosList = payload ? JSON.stringify(payload) : JSON.stringify(this.todosList)
     }
   }
 })

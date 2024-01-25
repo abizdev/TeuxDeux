@@ -32,12 +32,11 @@
         <!-- addTodo component -->
         <div class="px-5">
           <div class="w-full border-b-[1px] border-slate-300">
-            <input
+            <app-input
+              id="addInput"
               type="text"
-              v-model="newTodo"
-              @keyup.enter="addNewTodo()"
-              class="w-full h-full outline-none rounded-md text-sm py-[8.5px] px-[10px]"
-            >
+              v-model:modelValue="newTodo"
+            />
           </div>
         </div>
         <!-- addTodo component end -->
@@ -49,9 +48,10 @@
 <script setup lang="ts">
 import Heading from './components/Heading.vue';
 import TodoItem from './components/TodoItem.vue';
+import AppInput from './components/form/Input.vue'
 import draggable from 'vuedraggable';
 
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 import type { Todo } from './types/todo'
 
@@ -66,19 +66,34 @@ const todosList = computed({
   },
   set(newVal) {
     todosStore.todosList = newVal
+    todosStore.setLocalStorate(newVal)
   }
 })
 
-const addNewTodo = () => {
-
+const addNewTodo = (inputVal: string) => {
   const todo: Todo = {
     id: `${Math.random()}`,
-    text: newTodo.value,
+    text: inputVal,
     checked: false,
   }
   
-  todosStore.addTodo(todo)
   newTodo.value = ''
+  todosStore.addTodo(todo)
+  todosStore.setLocalStorate()
+}
+
+watch(newTodo, (newVal) => {
+  if(newVal) {
+    addNewTodo(newVal)
+  }
+})
+
+// on created check localstorage
+if(localStorage.todosList) {
+  console.log('created');
+  
+  const localList = JSON.parse(localStorage.getItem('todosList'))
+  todosStore.todosList = localList
 }
 
 </script>
