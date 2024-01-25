@@ -6,7 +6,7 @@
       :type="type"
       :value="modelValue"
       @input="update($event)"
-      class="w-full h-full outline-none rounded-md text-sm py-[8.5px] px-[10px]"
+      class="w-full h-full outline-none rounded-md text-sm py-[8.5px] px-[10px] transition duration-300"
       :class="isChecked === true ? 'line-through text-slate-300' : ''"
     />
   </div>

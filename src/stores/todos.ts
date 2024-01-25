@@ -8,6 +8,20 @@ export const useTodosStore = defineStore('todos', {
   actions: {
     addTodo(todo: Todo) {
       this.todosList.push(todo)
+    },
+    editTodo(todo: Todo) {
+      // find existion item index      
+      const existingItem = this.todosList.findIndex((item) => item.id === todo.id)
+
+      // delete item
+      this.todosList.splice(existingItem, 1, todo)
+    },
+    delTodo(id: string) {
+      // find existion item index
+      const existingItem = this.todosList.findIndex((item) => item.id === id)
+
+      // delete item
+      this.todosList.splice(existingItem, 1)
     }
   }
 })
