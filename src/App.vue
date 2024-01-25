@@ -4,24 +4,33 @@
     <div class="flex flex-col">
       <Heading />
   
-      <!-- todos list -->
-      <ul class="flex flex-col after:translate-y-[10px] after:mx-auto after:w-[85%] after:h-full after:bg-line-gradient min-h-[305px]">
-
-        <!-- todo item -->
-        <li 
-          v-for="(todo, index) in todosList" 
-          :key="todo.id"
-          class="relative px-5 group/item cursor-grab active:cursor-grabbing"
+      <div class="flex flex-col top-0 after:translate-y-[10px] after:mx-auto after:w-[85%] after:h-full after:bg-line-gradient min-h-[305px]">
+        <!-- todos list -->
+        <draggable
+          v-model="todosList"
+          tag="ul"
+          item-key="id"
+          class="flex flex-col"
         >
-          <TodoItem 
-            :id="todo.id"
-            :todoValue="todo.text"
-          />
-        </li>
-        <!-- todo item -->
+        
+          <!-- todo item -->
+          <template #item="{ element: todo }">
+            <li
+              class="item relative px-5 group/item"
+            >
+              <TodoItem 
+                :id="todo.id"
+                :todoValue="todo.text"
+              />
+            </li>
+          </template>
+          <!-- todo item -->
+  
+        </draggable>
+        <!-- todos list end -->
   
         <!-- addTodo component -->
-        <li class="px-5">
+        <div class="px-5">
           <div class="w-full border-b-[1px] border-slate-300">
             <input
               type="text"
@@ -30,11 +39,9 @@
               class="w-full h-full outline-none rounded-md text-sm py-[8.5px] px-[10px]"
             >
           </div>
-        </li>
+        </div>
         <!-- addTodo component end -->
-        
-      </ul>
-      <!-- todos list end -->
+      </div>
     </div>
   </div>
 </template>
@@ -42,16 +49,25 @@
 <script setup lang="ts">
 import Heading from './components/Heading.vue';
 import TodoItem from './components/TodoItem.vue';
+import draggable from 'vuedraggable';
 
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 import type { Todo } from './types/todo'
 
 import { useTodosStore } from './stores/todos'
 
-const { todosList, addTodo } = useTodosStore()
+const todosStore = useTodosStore()
 
 const newTodo = ref<string>('')
+const todosList = computed({
+  get() {
+    return todosStore.todosList
+  },
+  set(newVal) {
+    todosStore.todosList = newVal
+  }
+})
 
 const addNewTodo = () => {
 
@@ -61,9 +77,8 @@ const addNewTodo = () => {
     checked: false,
   }
   
-  addTodo(todo)
+  todosStore.addTodo(todo)
   newTodo.value = ''
-
 }
 
 </script>
