@@ -1,30 +1,56 @@
 import { defineStore } from "pinia";
-import type { Todo } from './types/todo'
+import type { Todo } from '../types/todo'
 
 export const useTodosStore = defineStore('todos', {
   state: () => ({
-    todosList: []
+    todosLists: [
+      [
+        {
+          "id": "0.48969378384430584",
+          "text": "a1",
+          "checked": false
+        },
+        {
+          "id": "0.042568000216382185",
+          "text": "a2",
+          "checked": false
+        }
+      ],
+      [
+        {
+          "id": "0.48969378384430584",
+          "text": "a1",
+          "checked": false
+        },
+        {
+          "id": "0.042568000216382185",
+          "text": "a2",
+          "checked": false
+        }
+      ],
+      [],
+    ]
   }),
   actions: {
-    addTodo(todo: Todo) {
-      this.todosList.push(todo)
+    addTodo(todo: Todo, tableId: number) {
+      this.todosLists[tableId].push(todo)
     },
-    editTodo(todo: Todo) {
+    editTodo(tableId: number, todo: Todo) {
       // find existion item index      
-      const existingItem = this.todosList.findIndex((item) => item.id === todo.id)
-
+      const existingItem = this.todosLists[tableId].findIndex((item) => item.id === todo.id)
+      
       // delete item
-      this.todosList.splice(existingItem, 1, todo)
+      this.todosLists[tableId].splice(existingItem, 1, todo)
     },
-    delTodo(id: string) {
+    delTodo(tableId: number, id: string) {
       // find existion item index
-      const existingItem = this.todosList.findIndex((item) => item.id === id)
-
+      const existingItem = this.todosLists[tableId].findIndex((item) => item.id === id)
+      
       // delete item
-      this.todosList.splice(existingItem, 1)
+      this.todosList[tableId].splice(existingItem, 1)
     },
     setLocalStorate(payload?: any) {
-      localStorage.todosList = payload ? JSON.stringify(payload) : JSON.stringify(this.todosList)
+      // localStorage.todosList = payload ? JSON.stringify(payload) : JSON.stringify(this.todosList)
     }
   }
 })

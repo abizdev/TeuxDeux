@@ -21,7 +21,8 @@ interface TodoProps {
   type: string,
   modelValue: string,
   labelText?: string,
-  isChecked?: boolean
+  isChecked?: boolean,
+  tableId: number
 }
 
 const props = defineProps<TodoProps>();
@@ -32,7 +33,8 @@ const inputField = ref(null)
 const update = ($event: { target: { value: string } }) => {
   if ($event.target.value) {
     // add focus to input
-    if($event.target.id === '#addItem') {
+    console.log($event.target.id)
+    if($event.target.id === `#addItem${props.tableId}`) {
       inputField.value.focus();
     }
 

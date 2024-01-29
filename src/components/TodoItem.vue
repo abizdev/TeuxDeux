@@ -8,6 +8,7 @@
       type="text"
       v-model:modelValue="inputValue"
       :isChecked="checkboxValue"
+      :tableId="tableId"
     />
     <app-button @click="delItem(id)"/>
   </div>
@@ -25,6 +26,7 @@ import { useTodosStore } from '../stores/todos'
 interface Props {
   id: string;
   todoValue: string;
+  tableId: number
 }
 
 const props = defineProps<Props>();
@@ -35,24 +37,22 @@ const inputValue = ref<string>(props.todoValue);
 const checkboxValue = ref<boolean>(false)
 
 const delItem = (todoId: string) => {
-  delTodo(todoId)
-  setLocalStorate()
+  delTodo(props.tableId, todoId)
+  // setLocalStorate()
 };
 
-const updatedVals = (isChecked?: boolean) => {
+const updatedVals = (isChecked: boolean) => {
 
   const updatedTodo = {
     id: props.id,
     text: inputValue.value,
     checked: isChecked
   }
-  editTodo(updatedTodo)
-  setLocalStorate()
+  editTodo(props.tableId, updatedTodo)
+  // setLocalStorate()
 }
 
-watch(checkboxValue, (newVal) => {
-  updatedVals(newVal)
-})
-watch(inputValue, () => updatedVals(checkboxValue))
+watch(checkboxValue, (newVal) => updatedVals(newVal))
+watch(inputValue, () => updatedVals(checkboxValue.value))
 
 </script>
