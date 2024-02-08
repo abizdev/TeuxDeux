@@ -10,6 +10,7 @@
         item-key="id"
         class="flex flex-col"
         group="todo"
+        @end="updateLocalStorage"
       >
       
         <!-- todo item -->
@@ -17,7 +18,7 @@
           <li
             class="item relative px-5 group/item"
           >
-            <TodoItem 
+            <TodoItem
               :id="todo.id"
               :todoValue="todo.text"
               :tableId="tableId"
@@ -64,7 +65,6 @@ const todosStore = useTodosStore()
 
 const newTodo = ref<string>('')
 
-
 const addNewTodo = (inputVal: string, tableId: number) => {
   const todo: Todo = {
     id: `${Math.random()}`,
@@ -74,6 +74,11 @@ const addNewTodo = (inputVal: string, tableId: number) => {
   
   newTodo.value = '';
   todosStore.addTodo(todo, tableId)
+  todosStore.setLocalStorate()
+}
+
+const updateLocalStorage = () => {
+  todosStore.setLocalStorate()
 }
 
 watch(newTodo, (newVal) => {
