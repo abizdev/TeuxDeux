@@ -7,7 +7,7 @@
       <draggable
         :list="todosList"
         tag="ul"
-        :item-key="`${tableId}`"
+        item-key="id"
         class="flex flex-col"
         group="todo"
       >
@@ -21,6 +21,7 @@
               :id="todo.id"
               :todoValue="todo.text"
               :tableId="tableId"
+              :isChecked="todo.checked"
             />
           </li>
         </template>

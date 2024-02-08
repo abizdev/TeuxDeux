@@ -26,7 +26,8 @@ import { useTodosStore } from '../stores/todos'
 interface Props {
   id: string;
   todoValue: string;
-  tableId: number
+  tableId: number,
+  isChecked: boolean,
 }
 
 const props = defineProps<Props>();
@@ -34,7 +35,7 @@ const props = defineProps<Props>();
 const { editTodo, delTodo, setLocalStorate } = useTodosStore()
 
 const inputValue = ref<string>(props.todoValue);
-const checkboxValue = ref<boolean>(false)
+const checkboxValue = ref<boolean>(props.isChecked)
 
 const delItem = (todoId: string) => {
   delTodo(props.tableId, todoId)
