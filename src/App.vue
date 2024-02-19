@@ -24,24 +24,26 @@
 
 <script setup lang="ts">
 import Table from './components/Table.vue';
-import Heading from "@/components/Heading.vue";
-import TodoItem from "@/components/TodoItem.vue";
-import AppInput from "@/components/form/Input.vue";
-
-import {Swiper, SwiperSlide} from 'swiper/vue'
-import { Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import {computed, watch} from 'vue';
+import { computed, ref } from 'vue';
 
 import { useTodosStore } from './stores/todos'
-import type {Todo} from "@/types/todo";
 
 const todosStore = useTodosStore()
 
 const todosLists = computed(() => todosStore.todosLists)
+
+let contentProp = ref<number>(0)
+let contentStyles = ref<string>('')
+
+const translateContent = (direction: string) => {
+  contentStyles.value = direction === 'right'
+    ? `translateX(${contentProp.value -= 20}%)`
+    : `translateX(${contentProp.value += 20}%)`   
+}
 
 // on created check localstorage
 if(localStorage.todosLists) {
