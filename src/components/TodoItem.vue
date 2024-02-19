@@ -39,7 +39,7 @@ const checkboxValue = ref<boolean>(props.isChecked)
 
 const delItem = (todoId: string) => {
   delTodo(props.tableId, todoId)
-  setLocalStorate()
+  // setLocalStorate()
 };
 
 const updatedVals = (isChecked: boolean) => {

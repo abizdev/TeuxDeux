@@ -32,13 +32,11 @@ const inputField = ref(null)
 
 const update = ($event: { target: { value: string } }) => {
   if ($event.target.value) {
-    // add focus to input
-    console.log($event.target.id)
     if($event.target.id === `#addItem${props.tableId}`) {
       inputField.value.focus();
     }
 
-    emit("update:modelValue", $event.target.value);
+    emit("update-val");
     
     $event.target.value = ''
   }

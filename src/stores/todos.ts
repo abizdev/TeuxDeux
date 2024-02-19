@@ -9,6 +9,20 @@ export const useTodosStore = defineStore('todos', {
       [],
       [],
       [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
     ]
   }),
   actions: {
@@ -16,6 +30,7 @@ export const useTodosStore = defineStore('todos', {
       this.todosLists[tableId].push(todo)
     },
     editTodo(tableId: number, todo: Todo) {
+
       // find existion item index      
       const existingItem = this.todosLists[tableId].findIndex((item) => item.id === todo.id)
       
