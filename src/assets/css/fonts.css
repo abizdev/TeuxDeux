@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'icons';
+  src: url('/fonts/fa-regular-400.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'icons';
+  src: url('/fonts/fa-solid-900.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 900;
+}

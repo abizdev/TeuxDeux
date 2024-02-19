@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col" >
+  <div class="flex flex-col w-[20%] flex-shrink-0" >
     <Heading />
 
     <div class="flex flex-col top-0 after:translate-y-[10px] after:mx-auto after:w-[85%] after:h-full after:bg-line-gradient min-h-[305px]">

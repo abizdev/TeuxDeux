@@ -9,6 +9,17 @@ export const useTodosStore = defineStore('todos', {
       [],
       [],
       [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
     ]
   }),
   actions: {
