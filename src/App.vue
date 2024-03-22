@@ -9,15 +9,15 @@
           v-for="(todosList, index) in todosLists"
           :key="index"
           :tableId="index"
-          :todosList="todosList"
+          :todosList="todosList.todos"
         />
       </div>
     </div>
-    <div class="flex flex-col absolute gap-y-1 h-8 top-12 left-0 p-1 border-2 border-red-500 rounded-sm bg-slate-300">
-      <button class="btn icon-chevron-left" @click="translateContent('left')"></button>
+    <div class="flex flex-col absolute gap-y-1 h-8 top-12 left-0 p-1 border-2 rounded-sm bg-slate-200">
+      <button class="btn icon-chevron-left bg-slate-300 hover:text-black" @click="translateContent('left')"></button>
     </div>
-    <div class="flex flex-col absolute gap-y-1 h-8 top-12 right-0 p-1 border-2 border-red-500 rounded-sm bg-slate-300">
-      <button class="btn icon-chevron-right" @click="translateContent('right')"></button>
+    <div class="flex flex-col absolute gap-y-1 h-8 top-12 right-0 p-1 border-2 rounded-sm bg-slate-200">
+      <button class="btn icon-chevron-right bg-slate-300 hover:text-black" @click="translateContent('right')"></button>
     </div>
   </div>
 </template>
@@ -38,6 +38,12 @@ const todosLists = computed(() => todosStore.todosLists)
 
 let contentProp = ref<number>(0)
 let contentStyles = ref<string>('')
+let activeTable = ref<number>(0)
+
+const date = Date.now()
+
+console.log(date);
+
 
 const translateContent = (direction: string) => {
   contentStyles.value = direction === 'right'

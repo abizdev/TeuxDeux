@@ -10,7 +10,6 @@
         item-key="id"
         class="flex flex-col"
         group="todo"
-        @end="updateLocalStorage"
       >
       
         <!-- todo item -->
@@ -52,8 +51,6 @@ import Heading from './Heading.vue';
 import TodoItem from './TodoItem.vue';
 import AppInput from './form/Input.vue'
 import draggable from 'vuedraggable';
-
-import { SwiperSlide } from "swiper/vue";
 
 import { ref, computed, watch } from 'vue';
 

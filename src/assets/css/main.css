@@ -78,5 +78,5 @@
   font-weight: 400;
 }
 
-.icon-chevron-right::before { content: '\f054'; }
-.icon-chevron-left::before { content: '\f053'; }
+.icon-chevron-right::before { content: '\f054' !important; }
+.icon-chevron-left::before { content: '\f053' !important; }

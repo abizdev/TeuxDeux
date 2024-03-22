@@ -4,27 +4,41 @@ import type { Todo } from '../types/todo'
 export const useTodosStore = defineStore('todos', {
   state: () => ({
     todosLists: [
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
+      {
+        todos: [],
+      },
     ]
   }),
   actions: {
     addTodo(todo: Todo, tableId: number) {
-      this.todosLists[tableId].push(todo)
+      this.todosLists[tableId].todos.push(todo)
     },
     editTodo(tableId: number, todo: Todo) {
 
